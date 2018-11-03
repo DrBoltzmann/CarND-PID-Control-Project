@@ -1,15 +1,27 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+
 class PID {
-public:
+//public:
+private:
   /*
   * Errors
   */
   double p_error;
   double i_error;
   double d_error;
+  double prev_cte;
 
+   /**
+   * Error counters
+  **/
+  long counter;
+  double errorSum;
+  double minError;
+  double maxError;
+  
   /*
   * Coefficients
   */ 
@@ -20,7 +32,8 @@ public:
   /*
   * Constructor
   */
-  PID();
+  //PID();
+  PID(double Kp, double Ki, double Kd);
 
   /*
   * Destructor.
@@ -41,6 +54,22 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+  
+    /*
+  *  Returns the average error.
+  */
+  double AverageError();
+
+  /*
+  * Returns the min error.
+  */
+  double MinError();
+
+  /*
+  * Returns the max error.
+  */
+  double MaxError();
+
 };
 
 #endif /* PID_H */
