@@ -48,8 +48,14 @@ A summary of hyperparameters and the outcomes:
 |0.10|0.001|5.0 |Oscillations better, curve failure     |
 |0.22|0.001|3.3 |Successful, relativley smooth          |
 
+### Video Documentation
+A video was prepared detailing the initial hyperparameter behavior at the extreme values, and then the final result, it is avaliable at the following YouTube link:
 
 
+
+### Conclusion
+
+A PID contorller was created using the standard approach and manual tuning of the hyperparameters. This was successful in creating a solution which could drive the car on the track simulation , although the smoothness of the diving trajectory should ideally be improvied. Future implementation of the Twiddle algorithim, which is essentially an optmizaiton of the hyperparameters should result in improved driving behavior of the vehicle.
 
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
