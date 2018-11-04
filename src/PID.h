@@ -4,8 +4,7 @@
 #include <vector>
 
 class PID {
-//public:
-private:
+public:
   /*
   * Errors
   */
@@ -13,14 +12,15 @@ private:
   double i_error;
   double d_error;
   double prev_cte;
+  //double err;
 
    /**
    * Error counters
   **/
-  long counter;
-  double errorSum;
-  double minError;
-  double maxError;
+  //long counter;
+  //double errorSum;
+  //double minError;
+  //double maxError;
   
   /*
   * Coefficients
@@ -33,8 +33,8 @@ private:
   * Constructor
   */
   //PID();
-  PID(double Kp, double Ki, double Kd);
-
+  //PID(double Kp, double Ki, double Kd);
+  PID();
   /*
   * Destructor.
   */
@@ -55,20 +55,24 @@ private:
   */
   double TotalError();
   
+    // Normalize the steer value to [-1, 1]
+  //double Normalize(double steer_value);
+
+  
     /*
   *  Returns the average error.
   */
-  double AverageError();
+  //double AverageError();
 
   /*
   * Returns the min error.
   */
-  double MinError();
+  //double MinError();
 
   /*
   * Returns the max error.
   */
-  double MaxError();
+  //double MaxError();
 
 };
 

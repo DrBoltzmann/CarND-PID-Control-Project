@@ -33,8 +33,12 @@ int main()
   uWS::Hub h;
 
   PID pid;
+  //PID pid_steer;
+  //PID pid_throttle;
+  
 // TODO: Initialize the pid variable.
-  // define PID coefficients when running simulator
+  // define PID coefficients at the command line to iterate faster instead of
+  // compiling from scratch each time when running simulator
   //double init_Kp = atof(argv[1]);
   //double init_Ki = atof(argv[2]);
   //double init_Kd = atof(argv[3]);
@@ -47,7 +51,7 @@ int main()
 
   // Final parameters.
   //pid.Init(0.15, 0.0, 2.5);
-
+  
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -72,11 +76,34 @@ int main()
           */
           
           pid.UpdateError(cte);
+          
+          //steer_value = 0;
+          steer_value = -pid.Kp*pid.p_error - pid.Kd*pid.d_error - pid.Ki*pid.i_error;          
           //steer_value = pid.TotalError();
-          double steerAngle = pid.TotalError();
+          if (steer_value>1){
+            steer_value = 1;
+          } else if (steer_value<-1){
+            steer_value = -1;
+          }
+
+          //double steerAngle = pid.TotalError();
+          
+          // Calculate P,I,D errors for steering and throttle
+          //pid_throttle.UpdateError(cruise_speed-speed);
+          //pid_steer.UpdateError(cte);
+          
+          // Calculate the steering and throttle value by summing the control values for PID
+          //throttle_value = pid_throttle.TotalError();
+          //steer_value = -pid_steer.TotalError();
+          
+          //  Normalize the steer_value to [-1,1]
+          //steer_value = pid_steer.Normalize(steer_value);
+          
+          
           
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
+          //std::cout << "Speed: " << speed << " Throttle Value: " << throttle_value << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
