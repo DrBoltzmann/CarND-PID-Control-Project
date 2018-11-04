@@ -33,24 +33,27 @@ int main()
   uWS::Hub h;
 
   PID pid;
-  //PID pid_steer;
-  //PID pid_throttle;
   
 // TODO: Initialize the pid variable.
+  
   // define PID coefficients at the command line to iterate faster instead of
   // compiling from scratch each time when running simulator
   //double init_Kp = atof(argv[1]);
   //double init_Ki = atof(argv[2]);
   //double init_Kd = atof(argv[3]);
   
-  double init_Kp = 0.15;
-  double init_Ki = 0.0;
-  double init_Kd = 2.5;
+  double init_Kp = 0.22;
+  double init_Ki = 0.001;
+  double init_Kd = 3.3;
   
   pid.Init(init_Kp, init_Ki, init_Kd);
-
+  
+  // Successful but erratic, not very smooth
+  //pid.Init(0.05, 0.1, 8.0);
+  // Oscillations reduced, still room for improvement on the difficult curves
+  //pid.Init(0.10, 0.001, 5.0);
   // Final parameters.
-  //pid.Init(0.15, 0.0, 2.5);
+  //pid.Init(0.22, 0.001, 3.3);
   
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -77,30 +80,10 @@ int main()
           
           pid.UpdateError(cte);
           
+          // Intially set steer_value to zero to test basic simulator driving straight
           //steer_value = 0;
-          steer_value = -pid.Kp*pid.p_error - pid.Kd*pid.d_error - pid.Ki*pid.i_error;          
-          //steer_value = pid.TotalError();
-          if (steer_value>1){
-            steer_value = 1;
-          } else if (steer_value<-1){
-            steer_value = -1;
-          }
+          steer_value = -(pid.Kp * pid.p_error) - (pid.Kd * pid.d_error) - (pid.Ki * pid.i_error);     
 
-          //double steerAngle = pid.TotalError();
-          
-          // Calculate P,I,D errors for steering and throttle
-          //pid_throttle.UpdateError(cruise_speed-speed);
-          //pid_steer.UpdateError(cte);
-          
-          // Calculate the steering and throttle value by summing the control values for PID
-          //throttle_value = pid_throttle.TotalError();
-          //steer_value = -pid_steer.TotalError();
-          
-          //  Normalize the steer_value to [-1,1]
-          //steer_value = pid_steer.Normalize(steer_value);
-          
-          
-          
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value << std::endl;
           //std::cout << "Speed: " << speed << " Throttle Value: " << throttle_value << std::endl;

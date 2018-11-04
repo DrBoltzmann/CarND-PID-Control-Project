@@ -9,7 +9,7 @@ https://review.udacity.com/#!/rubrics/1972/view
 
 # PID Contoller
 
-A proportional–integral–derivative controller (PID controller) is essentally an algorithm which steers a car proportionally to the cross-track error (CTE), which the distance to a reference trajectory of the vehicle. A key element of the PID design is the value set for the hyperparameters which control this behavior. The PID controller essentially calculates an error value between a desired setpoint and a measured process variable, and then applies a correction based on three terms: proportional (P), integral (I), and derivative (D). These hyperparameters need to be defined correctly for the car to drive safely around the simulation track.
+A proportional–integral–derivative controller (PID controller) is essentally an algorithm which steers a car proportionally to the cross-track error (CTE), which the distance to a reference trajectory of the vehicle. A key element of the PID design is the value set for the hyperparameters which control this behavior. The PID controller essentially calculates an error value between a desired setpoint and a measured process variable, and then applies a correction based on three terms: proportional (P), integral (I), and derivative (D). These hyperparameters need to be defined correctly for the car to drive safely around the simulation track. The solution follows the logic described in the classic approach (https://www.youtube.com/watch?v=YamBuzDjrs8).
 
 [//]: # (Image References)
 [image001]: ./images/PIDforDummies_pid_simplified.png "image001"
@@ -18,15 +18,14 @@ The following image illustrates well how the PID functions:
 https://www.csimn.com/CSI_pages/PIDforDummies.html
 ![alt text][image001]
 
-###Proportional Gain (Kp)
+### Proportional Gain (Kp)
 If only Kp is used, then the controller just multiplies the Error by Kp to define the controller output. Therefore, Kp would be directly propotiaonl to the CTE and will oscillate around the setpoint.
 
-###Integral (Ki)
+### Integral (Ki)
 Ki will integrate the error over time, until it approaches zero.
 
-###Differential (Kd)
+### Differential (Kd)
 Kd will cause the output to decrease if the process variable is increasing rapidly. This essentially counteracts the erratic behavior and oscillations in trajectory that occur if only a P controller is used.
-
 
 ### Hyperparameter Tuning
 
@@ -38,8 +37,17 @@ Three hyperparameter variables are used in the PID controller: Kp, Ki and Kd. Th
 | Ki           | 0     | 1     | 0     |
 | Kd           | 0     | 0     | 1     |
 
-The hyperparameter tuning method followed the approach detailed by National Instruments (http://www.ni.com/white-paper/3782/en/#toc3): 
+The hyperparameter tuning method followed an approach similar to that detailed by National Instruments (http://www.ni.com/white-paper/3782/en/#toc3): 
 After seeing the effect of each hyperparameter individually, Kd was increased till the output look oscillated but not completely unstable, defining the responsiveness of the system. Then Ki was increased to address oscillations, followed by increasing Kd to improve driving behavior.
+
+A summary of hyperparameters and the outcomes:
+
+| Kp | Ki  | Kd |Result                                 |
+|----|-----|----|---------------------------------------|
+|0.05|0.1  |8.0 |Successful but erratic, not very smooth|
+|0.10|0.001|5.0 |Oscillations better, curve failure     |
+|0.22|0.001|3.3 |Successful, relativley smooth          |
+
 
 
 

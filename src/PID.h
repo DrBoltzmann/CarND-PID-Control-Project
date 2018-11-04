@@ -11,16 +11,6 @@ public:
   double p_error;
   double i_error;
   double d_error;
-  double prev_cte;
-  //double err;
-
-   /**
-   * Error counters
-  **/
-  //long counter;
-  //double errorSum;
-  //double minError;
-  //double maxError;
   
   /*
   * Coefficients
@@ -32,9 +22,8 @@ public:
   /*
   * Constructor
   */
-  //PID();
-  //PID(double Kp, double Ki, double Kd);
   PID();
+  
   /*
   * Destructor.
   */
@@ -54,26 +43,6 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
-  
-    // Normalize the steer value to [-1, 1]
-  //double Normalize(double steer_value);
-
-  
-    /*
-  *  Returns the average error.
-  */
-  //double AverageError();
-
-  /*
-  * Returns the min error.
-  */
-  //double MinError();
-
-  /*
-  * Returns the max error.
-  */
-  //double MaxError();
-
 };
 
 #endif /* PID_H */
