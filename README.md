@@ -14,10 +14,6 @@ A proportional–integral–derivative controller (PID controller) is essentally
 [//]: # (Image References)
 [image001]: ./PIDforDummies_pid_simplified.png "image001"
 
-PID Diagram: 
-![alt text][image]
-[image]: https://github.com/DrBoltzmann/CarND-PID-Control-Project/blob/master/PIDforDummies_pid_simplified.png "PID Diagram"
-
 The following image illustrates well how the PID functions:
 https://www.csimn.com/CSI_pages/PIDforDummies.html
 ![alt text][image001]
