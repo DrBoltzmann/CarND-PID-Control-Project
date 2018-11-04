@@ -12,7 +12,7 @@ https://review.udacity.com/#!/rubrics/1972/view
 A proportional–integral–derivative controller (PID controller) is essentally an algorithm which steers a car proportionally to the cross-track error (CTE), which the distance to a reference trajectory of the vehicle. A key element of the PID design is the value set for the hyperparameters which control this behavior. The PID controller essentially calculates an error value between a desired setpoint and a measured process variable, and then applies a correction based on three terms: proportional (P), integral (I), and derivative (D). These hyperparameters need to be defined correctly for the car to drive safely around the simulation track. The solution follows the logic described in the classic approach (https://www.youtube.com/watch?v=YamBuzDjrs8).
 
 [//]: # (Image References)
-[image001]: ./images/PIDforDummies_pid_simplified.png "image001"
+[image001]: PIDforDummies_pid_simplified.png "image001"
 
 The following image illustrates well how the PID functions:
 https://www.csimn.com/CSI_pages/PIDforDummies.html
